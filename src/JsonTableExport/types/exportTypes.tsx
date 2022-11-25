@@ -1,4 +1,4 @@
 export enum ExportType{
-    XLSX,
-    CSV
+    XLSX = 'xlsx',
+    CSV = 'csv'
 }
