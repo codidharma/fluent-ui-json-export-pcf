@@ -9,13 +9,24 @@ export const ExportComponent = React.memo((props: ComponentProperties) => {
         data
     } = props;
 
-    const commandbarProps: ICommandBarItemProps[] = [{key: 'export', name: 'Export Data', iconProps: {iconName: 'Export'}}] as ICommandBarItemProps[];
+    const [hideDialogFlag, setHideDialogFlag] = React.useState(true);
+    
+    const commandbarProps: ICommandBarItemProps[] = [
+        {
+            key: 'export',
+            name: 'Export Data',
+            iconProps: {iconName: 'Export'},
+            onClick(ev?, item?) {
+                setHideDialogFlag(!hideDialogFlag);
+            },
+        }] as ICommandBarItemProps[];
+        
 
     return (
         <>
-            <CommandBar items={commandbarProps}>
-                
+            <CommandBar items={commandbarProps}>               
             </CommandBar>
+            
         </>
     );
 
