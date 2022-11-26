@@ -8,7 +8,7 @@ import { IDropdownOption, Dropdown, IDropdownProps } from '@fluentui/react/lib/D
 import { ExportType } from './types/exportTypes';
 import { Icon} from '@fluentui/react/lib/Icon';
 import { TextField } from '@fluentui/react/lib/TextField';
-import { ExportAsXlsx, ExportAsCsv } from './utils/exportAsXlsx';
+import { ExportAsXlsx, ExportAsCsv } from './utils/exportUtils';
 
 export const ExportComponent = React.memo((props: ComponentProperties) => {
     const {
