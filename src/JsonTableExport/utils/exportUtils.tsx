@@ -6,6 +6,9 @@ declare global {
     }
 }
 
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 export const ExportAsXlsx = (data: any[], fileName: string): void =>{
     
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
@@ -53,4 +56,28 @@ export const ExportAsCsv = (data: any[], fileName: string): void => {
 
         }
     }
+};
+
+export const ExportAsPdf = (data: any[], fileName: string): void => {
+    
+    const doc = new jsPDF();
+    const tableRows: any[] = [];
+    const columnKeys = Object.keys(data[0]);
+
+    data.forEach((item) => {
+        
+        const tableRow: any[] = [];
+        columnKeys.forEach((colKey) => {
+            tableRow.push(item[colKey]);
+        });
+        tableRows.push(tableRow);
+    });
+
+    autoTable(doc, {
+        head: [columnKeys],
+        body: tableRows,
+        startY: 10
+    });
+
+    doc.save(fileName);
 };
