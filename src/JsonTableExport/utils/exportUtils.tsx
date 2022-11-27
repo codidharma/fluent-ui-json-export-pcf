@@ -18,7 +18,7 @@ export const ExportAsXlsx = (data: any[], fileName: string): void =>{
     const workBook = {Sheets: {'data': workSheet}, SheetNames: ['data'] };
     const excelBuffer = XLSX.write(workBook, { bookType: 'xlsx', type: 'array' });
     const excelData = new Blob([excelBuffer], {type: fileType});
-    FileSaver.saveAs(excelData, fileName);
+    FileSaver.saveAs(excelData, fileName + '.xlsx');
 };
 
 export const ExportAsCsv = (data: any[], fileName: string): void => {
@@ -42,14 +42,14 @@ export const ExportAsCsv = (data: any[], fileName: string): void => {
 
     const blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
     if(navigator.msSaveBlob){
-        navigator.msSaveBlob(blob, fileName);
+        navigator.msSaveBlob(blob, fileName + '.csv');
     }
     else {
         const link = document.createElement('a');
         if(link.download !== undefined) {
             const url = URL.createObjectURL(blob);
             link.setAttribute('href', url);
-            link.setAttribute('download', fileName);
+            link.setAttribute('download', fileName + '.csv');
             link.style.visibility = 'hidden';
             link.dataset.interception = 'off';
             document.body.appendChild(link);
@@ -81,7 +81,7 @@ export const ExportAsPdf = (data: any[], fileName: string): void => {
         startY: 10
     });
 
-    doc.save(fileName);
+    doc.save(fileName + '.pdf');
 };
 
 export const ExportAsXml = (data: any[], fileName: string): void => {
@@ -91,8 +91,7 @@ export const ExportAsXml = (data: any[], fileName: string): void => {
     const options = {compact: true, ignoreComment: true, spaces: 4, ignoreDeclaration: false};
     const jsonDataObject = {root:{data: data}};
     const xml = json2xml(JSON.stringify(jsonDataObject), options);
-    console.log(xml);
     const xmlBlob = new Blob([xml],{type:xml});
-    FileSaver.saveAs(xmlBlob, fileName);
+    FileSaver.saveAs(xmlBlob, fileName + '.xml');
     
 };

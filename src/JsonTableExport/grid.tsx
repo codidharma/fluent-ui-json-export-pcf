@@ -17,7 +17,7 @@ export const ExportComponent = React.memo((props: ComponentProperties) => {
 
     const [hideDialogFlag, setHideDialogFlag] = React.useState(true);
     const [selectedExportOption, setSelectedExportOption] = React.useState('');
-    const [exportFileName, setExportFileName] = React.useState('');
+    const [exportFileNameWithoutExtension, setExportFileName] = React.useState('');
 
     const dialogStyles = {main:{maxWidth: 200}};
 
@@ -60,8 +60,6 @@ export const ExportComponent = React.memo((props: ComponentProperties) => {
 
     const iconStyles = { marginRight: '8px' };
 
-    //const dropdownStyles = {dropdown: {width: 300}};
-
     const onRenderOption = (option?: IDropdownOption) : JSX.Element => {
         return(
             <div>
@@ -75,13 +73,11 @@ export const ExportComponent = React.memo((props: ComponentProperties) => {
 
     const onExportOptionDropDownChange = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number): void => {
         setSelectedExportOption(option!.key.toString());
-        console.log(option!.key.toString());
-
+        
     };
 
     const onFileNameChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string): void => {
         setExportFileName(newValue!);
-        console.log(newValue!);
     };
 
     const onCancelExportDialog = () => {
@@ -113,16 +109,16 @@ export const ExportComponent = React.memo((props: ComponentProperties) => {
         switch(selectedExportOption as ExportType)
         {
         case ExportType.XLSX:
-            ExportAsXlsx(exportableData, exportFileName + '.xlsx');
+            ExportAsXlsx(exportableData, exportFileNameWithoutExtension);
             break;
         case ExportType.CSV:
-            ExportAsCsv(exportableData, exportFileName + '.csv');
+            ExportAsCsv(exportableData, exportFileNameWithoutExtension);
             break;
         case ExportType.PDF:
-            ExportAsPdf(exportableData, exportFileName + '.pdf');
+            ExportAsPdf(exportableData, exportFileNameWithoutExtension);
             break;
         case ExportType.XML:
-            ExportAsXml(exportableData, exportFileName + '.xml');
+            ExportAsXml(exportableData, exportFileNameWithoutExtension);
             break;
         }
         
@@ -162,7 +158,7 @@ export const ExportComponent = React.memo((props: ComponentProperties) => {
                     </Stack.Item>
                     <Stack.Item>
                         <TextField
-                            placeholder='Enter the export file name'
+                            placeholder='Enter file name without extension'
                             label='Export File Name'
                             onChange={onFileNameChange}
                         />
