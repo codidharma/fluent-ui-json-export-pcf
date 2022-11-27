@@ -8,6 +8,8 @@ declare global {
 
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import {json2xml} from 'xml-js';
+import { Buffer } from 'buffer';
 
 export const ExportAsXlsx = (data: any[], fileName: string): void =>{
     
@@ -80,4 +82,17 @@ export const ExportAsPdf = (data: any[], fileName: string): void => {
     });
 
     doc.save(fileName);
+};
+
+export const ExportAsXml = (data: any[], fileName: string): void => {
+    window.Buffer = Buffer;
+    
+    const fileType = 'text/xml';
+    const options = {compact: true, ignoreComment: true, spaces: 4, ignoreDeclaration: false};
+    const jsonDataObject = {root:{data: data}};
+    const xml = json2xml(JSON.stringify(jsonDataObject), options);
+    console.log(xml);
+    const xmlBlob = new Blob([xml],{type:xml});
+    FileSaver.saveAs(xmlBlob, fileName);
+    
 };

@@ -1,5 +1,6 @@
 export enum ExportType{
     XLSX = 'xlsx',
     CSV = 'csv',
-    PDF = 'pdf'
+    PDF = 'pdf',
+    XML = 'xml'
 }

@@ -8,7 +8,7 @@ import { IDropdownOption, Dropdown, IDropdownProps } from '@fluentui/react/lib/D
 import { ExportType } from './types/exportTypes';
 import { Icon} from '@fluentui/react/lib/Icon';
 import { TextField } from '@fluentui/react/lib/TextField';
-import { ExportAsXlsx, ExportAsCsv, ExportAsPdf } from './utils/exportUtils';
+import { ExportAsXlsx, ExportAsCsv, ExportAsPdf, ExportAsXml } from './utils/exportUtils';
 
 export const ExportComponent = React.memo((props: ComponentProperties) => {
     const {
@@ -50,6 +50,11 @@ export const ExportComponent = React.memo((props: ComponentProperties) => {
             key : ExportType.PDF,
             text: 'Export as PDF',
             data: { icon: 'PDF'}
+        },
+        {
+            key : ExportType.XML,
+            text: 'Export as XML',
+            data: { icon: 'FileCode'}
         }
     ] as IDropdownOption[];
 
@@ -115,6 +120,9 @@ export const ExportComponent = React.memo((props: ComponentProperties) => {
             break;
         case ExportType.PDF:
             ExportAsPdf(exportableData, exportFileName + '.pdf');
+            break;
+        case ExportType.XML:
+            ExportAsXml(exportableData, exportFileName + '.xml');
             break;
         }
         

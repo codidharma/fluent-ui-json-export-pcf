@@ -18,7 +18,9 @@
     "jspdf-autotable": "^3.5.25",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "xlsx": "^0.18.5"
+    "stream": "^0.0.2",
+    "xlsx": "^0.18.5",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
