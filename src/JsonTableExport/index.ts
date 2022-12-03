@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 import {IInputs, IOutputs} from './generated/ManifestTypes';
 import { ExportComponent } from './grid';
 
@@ -7,7 +7,7 @@ export class JsonTableExport implements ComponentFramework.StandardControl<IInpu
 
     jsonData: string|null = null;
     container: HTMLDivElement;
-    
+    root: ReactDOM.Root;
     
     constructor()
     {
@@ -27,13 +27,21 @@ export class JsonTableExport implements ComponentFramework.StandardControl<IInpu
 
         this.jsonData = context.parameters.Data.raw;
 
-        ReactDOM.render(
+        this.root = ReactDOM.createRoot(this.container);
+        this.root.render(
             React.createElement(ExportComponent, {
                 data: this.jsonData!
                 
-            }),
-            this.container
+            })
         );
+
+        // ReactDOM.render(
+        //     React.createElement(ExportComponent, {
+        //         data: this.jsonData!
+                
+        //     }),
+        //     this.container
+        // );
     }
 
     public getOutputs(): IOutputs
@@ -43,6 +51,8 @@ export class JsonTableExport implements ComponentFramework.StandardControl<IInpu
 
     public destroy(): void
     {
-        ReactDOM.unmountComponentAtNode(this.container);
+        this.root.unmount
+        //ReactDOM .unmountComponentAtNode(this.container);
+        
     }
 }
