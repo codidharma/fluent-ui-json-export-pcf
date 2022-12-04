@@ -20,7 +20,7 @@ Following short video provided shows how to configure and use the component.
 
 https://user-images.githubusercontent.com/113417221/205482093-b8d7d836-1fc2-495c-b8ff-68a959f7d236.mp4
 
-Read more about it on my blog.
+Read more about it on my blog [Virtual PCF Component to Export Json Table(Array) Data in Canvas Apps](https://codidharma.com/posts/json-table-export-pcf/)
 
 
 
